@@ -1,0 +1,6 @@
+ Number of phenotyped RILs per population in each environment 
+ High Salt Low Salt
+A6140 186 187
+GA150 61 61
+GA250 61 61
+GA450 42 42
