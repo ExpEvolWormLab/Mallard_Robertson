@@ -1,0 +1,22 @@
+x
+
+	 Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: glm(formula = cbind(data$GFP, data$nonGFP) ~ population, family = "quasibinomial", 
+    data = data)
+
+Linear Hypotheses:
+               Estimate Std. Error z value Pr(>|z|)   
+GA1 - A00 == 0  -1.2087     0.4639  -2.605  0.04331 * 
+GA2 - A00 == 0  -1.6002     0.4537  -3.527  0.00195 **
+GA4 - A00 == 0  -1.1551     0.4141  -2.789  0.02530 * 
+GA2 - GA1 == 0  -0.3915     0.5955  -0.657  0.90953   
+GA4 - GA1 == 0   0.0536     0.5660   0.095  0.99968   
+GA4 - GA2 == 0   0.4451     0.5576   0.798  0.84996   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+(Adjusted p values reported -- single-step method)
+
