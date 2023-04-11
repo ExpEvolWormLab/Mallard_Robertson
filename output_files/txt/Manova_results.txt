@@ -1,0 +1,17 @@
+x
+                               Df   Wilks approx F num Df den Df    Pr(>F)    
+env_label                       1 0.13728   523.41      7  583.0 < 2.2e-16 ***
+population                      3 0.30973    40.20     21 1674.6 < 2.2e-16 ***
+temperature                     1 0.52131    76.48      7  583.0 < 2.2e-16 ***
+rel_humidity                    1 0.98677     1.12      7  583.0    0.3508    
+logD                            1 0.26888   226.47      7  583.0 < 2.2e-16 ***
+is_2012                         1 0.58612    58.81      7  583.0 < 2.2e-16 ***
+date_str                       96 0.17860     1.70    672 4085.4 < 2.2e-16 ***
+env_label:population            3 0.82841     5.40     21 1674.6  3.99e-14 ***
+temperature:rel_humidity        1 0.98433     1.33      7  583.0    0.2352    
+temperature:logD                1 0.93379     5.91      7  583.0  1.20e-06 ***
+rel_humidity:logD               1 0.99185     0.68      7  583.0    0.6856    
+temperature:rel_humidity:logD   1 0.98383     1.37      7  583.0    0.2160    
+Residuals                     589                                             
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
