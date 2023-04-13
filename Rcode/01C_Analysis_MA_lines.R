@@ -64,6 +64,7 @@ nb_trait = length(vect_P_traits)
   
   write.table(VCV_mat_MAlines$G1_mat, quote=FALSE,sep="\t", row.names=FALSE,col.names=FALSE, file=paste0("output_files/txt/", "MAlines",".txt"))
   
+## Eigendecomposition
 
-
+  write.table(eigen(VCV_mat_MAlines$G1_mat)$vectors,"output_files/txt/MAlines_eigenvectors.txt",row.names=FALSE,quote=FALSE,sep='\t')
   
