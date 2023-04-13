@@ -114,6 +114,8 @@ for(k in 1:nrow(VCV_with_w_NaCl$VCV_Mat)){
 
 v_col = c("cadetblue1", "cornflowerblue", "slateblue2")
 
+output_table=NULL
+
 pdf(file='plots/Figure9.pdf',h=8,w=8)
 layout(matrix(c(1,1,2,3),2,2),h=c(.8,1))
 
@@ -129,28 +131,31 @@ temp_80 <- apply(vect_betasP_withBL_NaCl_GA1,2,function(x){HPDinterval(mcmc(x),p
 
 arrows(c(1:7)+.2,temp_95[1,],c(1:7)+.2, temp_95[2,],code=3,length=.025,angle=90,col='black')
 arrows(c(1:7)+.2,temp_80[1,],c(1:7)+.2, temp_80[2,],code=0,length=.0,angle=90,col=v_col[1],lwd=2)
+output_table=cbind(output_table,t(temp_80),t(temp_95))
 
 temp_95 <- apply(vect_betasP_withBL_NaCl_GA2,2,function(x){HPDinterval(mcmc(x))})/avg_gen_change
 temp_80 <- apply(vect_betasP_withBL_NaCl_GA2,2,function(x){HPDinterval(mcmc(x),prob=.8)})/avg_gen_change
 
 arrows(c(1:7)+.3,temp_95[1,],c(1:7)+.3, temp_95[2,],code=3,length=.025,angle=90,col='black')
 arrows(c(1:7)+.3,temp_80[1,],c(1:7)+.3, temp_80[2,],code=0,length=.0,angle=90,col=v_col[2],lwd=2)
+output_table=cbind(output_table,t(temp_80),t(temp_95))
 
 temp_95 <- apply(vect_betasP_withBL_NaCl_GA3,2,function(x){HPDinterval(mcmc(x))})/avg_gen_change
 temp_80 <- apply(vect_betasP_withBL_NaCl_GA3,2,function(x){HPDinterval(mcmc(x),prob=.8)})/avg_gen_change
 
 arrows(c(1:7)+.4,temp_95[1,],c(1:7)+.4, temp_95[2,],code=3,length=.025,angle=90,col='black')
 arrows(c(1:7)+.4,temp_80[1,],c(1:7)+.4, temp_80[2,],code=0,length=.0,angle=90,col=v_col[3],lwd=2)
-
+output_table=cbind(output_table,t(temp_80),t(temp_95))
 # No sampling of the trait covariances with fitness 
 temp_95 <- apply(vect_betas_withBL_NaCl_no_cov_sampling,2,function(x){HPDinterval(mcmc(x))})
 temp_80 <- apply(vect_betas_withBL_NaCl_no_cov_sampling,2,function(x){HPDinterval(mcmc(x),prob=.8)})
 
 arrows(c(1:7)-.2,temp_95[1,],c(1:7)-.2, temp_95[2,],code=3,length=.05,angle=90,col='black')
 arrows(c(1:7)-.2,temp_80[1,],c(1:7)-.2, temp_80[2,],code=0,length=.0,angle=90,col=c(rep("grey",6),"grey"),lwd=2)
+output_table=cbind(output_table,t(temp_80),t(temp_95))
 temp_Post <- apply(vect_betas_withBL_NaCl_no_cov_sampling,2,function(x){posterior.mode(mcmc(x))})
 points(1:7-.2, temp_Post,pch=16,col='black')
-
+output_table=cbind(output_table,temp_Post)
 abline(h=0,lty=2)
 
 mtext(side=3,"A",at=0,cex=1.2)
@@ -186,6 +191,19 @@ arrows(temp_arrows_80[1,8:28],rep(1:7)+rep(c(0,.1,.2),each=7), temp_arrows_80[2,
 points(apply(all_ratios[,8:28],2,function(x){median(x)}),rep(1:7,3)+rep(c(0,.1,.2),each=7),pch=21,bg="grey")
 mtext(side=3,"C",at=-3,cex=1.2)
 dev.off()
+
+# Output tables
+colnames(output_table)=c("GA150 - 83% CI (lower)","GA150 - 83% CI (upper)",
+"GA150 - 95% CI (lower)","GA150 - 95% CI (upper)",
+"GA250 - 83% CI (lower)","GA250 - 83% CI (upper)",
+"GA250 - 95% CI (lower)","GA250 - 95% CI (upper)",
+"GA450 - 83% CI (lower)","GA450 - 83% CI (upper)",
+"GA450 - 95% CI (lower)","GA450 - 95% CI (upper)",
+"Beta G - 83% CI (lower)","Beta G - 83% CI (upper)",
+"Beta G - 95% CI (lower)","Beta G - 95% CI (upper)",
+"Beta G - posterior mode")
+write.table(output_table,file='output_files/txt/Selection_gradients.txt',row.names=FALSE,sep='\t',quote=FALSE)
+
 
 
 pdf(file='plots/Figure9_figure_supplement1.pdf',w=5)

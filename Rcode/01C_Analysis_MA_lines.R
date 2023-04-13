@@ -66,5 +66,9 @@ nb_trait = length(vect_P_traits)
   
 ## Eigendecomposition
 
+  # Proportion of variance explained by each axis
+  eigen(VCV_mat_MAlines$G1_mat)$values/sum(eigen(VCV_mat_MAlines$G1_mat)$values)
   write.table(eigen(VCV_mat_MAlines$G1_mat)$vectors,"output_files/txt/MAlines_eigenvectors.txt",row.names=FALSE,quote=FALSE,sep='\t')
   
+  
+  write.table(round(eigen(VCV_mat_MAlines$G1_mat)$vectors,digits=2),"tempMA.txt",row.names=FALSE,quote=FALSE,sep='\t')

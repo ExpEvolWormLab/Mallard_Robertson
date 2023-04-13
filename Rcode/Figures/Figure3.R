@@ -101,7 +101,7 @@ arrows(1.75,temp_95[1,1],1.75,temp_95[1,2],code=3,angle=90,length=0.05)
 arrows(1.75,temp_80[1,1],1.75,temp_80[1,2],code=3,angle=90,length=0,col="gray",lwd=2)
 points(1.75,mean(vect_rand_thetaE_NaCl_2),pch=16)
 
-temp_95 <- HPDinterval(as.mcmc(vect_rand_thetaE_NaCl_3))
+temp_95 <- HPDinterval(as.mcmc(vect_rand_thetaE_NaCl_3),prob=0.95)
 temp_80 <- HPDinterval(as.mcmc(vect_rand_thetaE_NaCl_3),prob=0.83)
 
 arrows(2,temp_95[1,1],2,temp_95[1,2],code=3,angle=90,length=0.05)
