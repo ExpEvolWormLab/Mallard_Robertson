@@ -2,12 +2,6 @@ rm(list=ls())
 gc()
 #load libraries
 library(MCMCglmm)
-#library(coda)
-#library(matrixStats)
-#library(data.table)
-#library(lme4)
-
-#library(parallel)
 
 # Load the phenotypic data
 load('output_files/RData/Phenotypic_data.RData')
@@ -16,7 +10,6 @@ load('output_files/RData/Phenotypic_data.RData')
 load("data/fertility_with_n.rda")
 
 vect_P_traits = c("T12", "T13", "T21", "T23", "T31","T32","area.F")
-
 
 mean_relative_fit <- subset(ecoefs, pop%in%c("A6140","GA") & env=="NaCl")
 names(mean_relative_fit)[4] <- "Std_Error"
@@ -132,11 +125,7 @@ for(i in 1:length(output_list)){
   all_Gzw= rbind(all_Gzw,output_list[[i]][1:64])
 }
 
-
-#### OK here we do the matrix plot
-#load('output_files_elife/RData/Beta_NaCl_NGM_withBL_scaled.RData')
-
-pdf("plots_elife/Effect_of_fitness_variation.pdf",h=8,w=5)
+pdf("plots/Effect_of_fitness_variation.pdf",h=8,w=5)
 par(mar=c(5,7,4,2))
 
 vect_6t_v2 <- c(c(2:7,11:15,20:23,29:31,38,39,47),c(57:63),c(9*(1:8)-8))
@@ -180,7 +169,7 @@ legend(-.28,25,c("Various fitness","Mean fitness"),lwd=2,lty=c(1,0),col=c("cornf
 dev.off()
 
 
-pdf("plots_elife/Figure4_supplement_figure2.pdf",w=6)
+pdf("plots/Figure4_supplement_figure2.pdf",w=6)
 par(mar=c(5,7,4,2))
 
 vect_6t_v2_VarFit <- c(57:64)

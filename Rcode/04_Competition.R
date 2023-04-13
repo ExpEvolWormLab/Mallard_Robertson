@@ -31,7 +31,7 @@ for(i in 1:4) vcol[i]=rgb(t(col2rgb(vcol[i])/255),alpha=.8)
 test_mod_noI <- glm(cbind(data$GFP,data$nonGFP) ~ population-1 ,family='quasibinomial',data=data); summary(test_mod)
 data_freq <- data$GFP/(data$GFP+data$nonGFP)
 
-pdf(file='plots_elife/Figure5_noasterisks.pdf',h=4,w=5)
+pdf(file='plots/Figure5_noasterisks.pdf',h=4,w=5)
 par(mfrow=c(1,1),mar=c(5,7,4,0))
 plot((1-data_freq)~jitter(as.numeric(as.factor(data$population))),pch=16,xlim=c(0,5),ylim=c(.8,1),col = vcol[as.numeric(as.factor(data$population))],ylab="Relative fitness to GFP tester\n(wild-type frequency)",xlab="Population",bty="n",
      xaxt="n")

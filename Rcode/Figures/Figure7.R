@@ -161,7 +161,7 @@ true_GA1_v2 <- diag(t(Lambda_NaCl)  %*% (VCV_mat_NaCl[[2]]$G1_mat/2)  %*% Lambda
 true_GA2_v2 <- diag(t(Lambda_NaCl)  %*% (VCV_mat_NaCl[[3]]$G1_mat/2)  %*% Lambda_NaCl)
 true_GA4_v2 <- diag(t(Lambda_NaCl)  %*% (VCV_mat_NaCl[[4]]$G1_mat/2)  %*% Lambda_NaCl)
 
-pdf(file='plots_elife/Figure7_figure_supplement1.pdf')#,h=9,w=4)
+pdf(file='plots/Figure7_figure_supplement1.pdf')#,h=9,w=4)
 temp_95_NULL_GA1 <- HPDinterval(as.mcmc(GA150_NaCl_null/2),prob=.95)
 temp_95_NULL_GA2 <- HPDinterval(as.mcmc(GA250_NaCl_null/2),prob=.95)
 temp_95_NULL_GA4 <- HPDinterval(as.mcmc(GA450_NaCl_null/2),prob=.95)
@@ -189,7 +189,7 @@ legend(.9,.19,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
 dev.off()
 
 
-pdf(file='plots_elife/Figure7_figure_supplement2.pdf')#,h=9,w=4)
+pdf(file='plots/Figure7_figure_supplement2.pdf')#,h=9,w=4)
 plot(eigen(VCV_mat_NaCl[[1]]$G1_mat/2)$values~c(1:7),pch=16,xlim=c(1,7.5),bty="n",ylim=c(0.001,.83),ylab=expression(paste('Genetic variance (',lambda[i],")")),type="n",xaxt="n",xlab="",log="y")
 axis(1,at=1:7,c(expression(g[max]),expression(g[2]),expression(g[3]),expression(g[4]),expression(g[5]),expression(g[6]),expression(g[7])),las=1)
 
@@ -212,7 +212,7 @@ legend(3,.3,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
 dev.off()
 
 
-pdf(file='plots_elife/Figure7_figure_supplement3.pdf')
+pdf(file='plots/Figure7_figure_supplement3.pdf')
 
 plot(eigen(VCV_mat_NGM[[1]]$G1_mat/2)$values~c(1:7),pch=16,xlim=c(1,7.5),bty="n",ylim=c(0.001,.83),ylab='Genetic variance',type="n",xaxt="n",xlab="",log="y")
 axis(1,at=1:7,c(expression(g[max]),expression(g[2]),expression(g[3]),expression(g[4]),expression(g[5]),expression(g[6]),expression(g[7])),las=1)

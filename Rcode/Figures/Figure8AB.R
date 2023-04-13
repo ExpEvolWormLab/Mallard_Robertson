@@ -10,7 +10,7 @@ load('output_files/RData/SSCP_eigenvectors.RData')
 
 # Load the randomized G matrices
 null_matrix=new.env()
-load("output_files_elife/RData_Random/Random_G_Analysis_Cemee_Pop_WI_A6140_NaCl_LIGHT.RData",envir=null_matrix)
+load("output_files/RData_Random/Random_G_Analysis_Cemee_Pop_WI_A6140_NaCl_LIGHT.RData",envir=null_matrix)
 A6140_NaCl_NULL = null_matrix$df_G1
 rm(null_matrix);gc()
 
@@ -64,7 +64,7 @@ for(i in 1:1000){
 Angle_rand[Angle_rand>90]= 180-Angle_rand[Angle_rand>90]
 
 
-pdf(file='plots_elife/Figure8AB.pdf',width=6, height=4)
+pdf(file='plots/Figure8AB.pdf',width=6, height=4)
 
 layout(mat=matrix(c(1,2),1,2),w=c(1,1.3))
 par(mar=c(5,4,4,2))

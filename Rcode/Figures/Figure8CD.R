@@ -7,13 +7,13 @@ load("output_files/RData/G_matrices_high_salt.RData")
 vect_P_traits = c("T12", "T13", "T21", "T23", "T31","T32","area.F")
 
 temp.env=new.env()
-load('output_files_elife/RData/Random_skewers.RData',envir=temp.env)
+load('output_files/RData/Random_skewers.RData',envir=temp.env)
 e11=temp.env$R.structure$vectors[,1]
 rm(temp.env);gc()
 
 # Load the randomized G matrices
 null_matrix=new.env()
-load("output_files_elife/RData_Random/Random_G_Analysis_Cemee_Pop_WI_A6140_NaCl_LIGHT.RData",envir=null_matrix)
+load("output_files/RData_Random/Random_G_Analysis_Cemee_Pop_WI_A6140_NaCl_LIGHT.RData",envir=null_matrix)
 A6140_NaCl_NULL = null_matrix$df_G1
 rm(null_matrix);gc()
 
@@ -69,7 +69,7 @@ for(i in 1:1000){
 Angle_rand[Angle_rand>90]= 180-Angle_rand[Angle_rand>90]
 
 
-pdf(file='plots_elife/Figure8CD.pdf',width=6, height=4)
+pdf(file='plots/Figure8CD.pdf',width=6, height=4)
 
 layout(mat=matrix(c(1,2),1,2),w=c(1,1.3))
 par(mar=c(5,4,4,2))

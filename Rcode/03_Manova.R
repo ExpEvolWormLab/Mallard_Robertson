@@ -33,7 +33,7 @@ summary(unique.manova)
 
 ## Save the coefficients in a table
 write.table(unique.manova$line_env$coefficients,file='output_files/txt/Manova.estimates.txt',sep='\t',quote=FALSE)
-write.table(capture.output(summary.aov(unique.manova$line_env)),file='output_files_elife/txt/Manova_trait_responses.txt',row.names=FALSE,quote=FALSE,sep='\t')
+write.table(capture.output(summary.aov(unique.manova$line_env)),file='output_files/txt/Manova_trait_responses.txt',row.names=FALSE,quote=FALSE,sep='\t')
 
 # summary for the block effects
 id_block = substring(row.names(unique.manova$line_env$coefficients),1,4)=="date"
@@ -41,7 +41,7 @@ colMeans(unique.manova$line_env$coefficients[id_block,],na.rm=TRUE)
 colSds(unique.manova$line_env$coefficients[id_block,],na.rm=TRUE)
 
 m.unique = summary(unique.manova, test = "Wilks")
-write.csv(capture.output(m.unique$`Error: line_env`),file='output_files_elife/txt/Manova_results.txt',quote=FALSE,row.names=FALSE)
+write.csv(capture.output(m.unique$`Error: line_env`),file='output_files/txt/Manova_results.txt',quote=FALSE,row.names=FALSE)
 
 # Calculate Dplast as the SSCP matrix for env. effect
 Dplast <- m.unique$`Error: line_env`$SS$env_label
@@ -65,5 +65,3 @@ write.table(file='output_files/txt/SSCP_plasticity_ED.txt',sep='\t',quote=FALSE,
 write.table(file='output_files/txt/SSCP_divergence_ED.txt',sep='\t',quote=FALSE,row.names=FALSE,col.names=FALSE,round(EV_div,digits=3))
 
 save(list=c("all_data"),file='output_files/RData/Phenotypic_data_for_MANOVA.RData')
-
-#save(list=ls(),file='output_files/RData/Pi_Theta_Plasticity_A6140_MANOVA.RData')

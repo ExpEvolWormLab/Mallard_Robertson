@@ -5,7 +5,7 @@ load('output_files/RData/G_matrices_high_salt.RData')
 
 nb_trait=8
 
-pdf(file='plots_elife/Figure4_supplement_figure1.pdf',h=9,w=5.5)
+pdf(file='plots/Figure4_supplement_figure1.pdf',h=9,w=5.5)
 
 par(mar=c(5,7,4,2))
 
