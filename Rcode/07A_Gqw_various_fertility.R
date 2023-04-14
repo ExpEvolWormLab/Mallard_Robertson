@@ -2,7 +2,7 @@ rm(list=ls())
 gc()
 #load libraries
 library(MCMCglmm)
-
+library(parallel)
 # Load the phenotypic data
 load('output_files/RData/Phenotypic_data.RData')
 
@@ -114,10 +114,9 @@ stopCluster(clust)
 save(list=c("output_list"),file="output_files/RData/Gqw_with_various_fertility.RData")
 
 ######################## Analyze the results ########################
-library(MCMCglmm)
 rm(list=ls())
 gc()
-
+library(MCMCglmm)
 load("output_files/RData/Gqw_with_various_fertility.RData")
 load("output_files/RData/Gqw_High_Salt.RData")
 all_Gzw = NULL
@@ -125,48 +124,48 @@ for(i in 1:length(output_list)){
   all_Gzw= rbind(all_Gzw,output_list[[i]][1:64])
 }
 
-pdf("plots/Effect_of_fitness_variation.pdf",h=8,w=5)
-par(mar=c(5,7,4,2))
-
-vect_6t_v2 <- c(c(2:7,11:15,20:23,29:31,38,39,47),c(57:63),c(9*(1:8)-8))
-vProb <- .95
-
-vectX_VarFit <- c(posterior.mode(as.mcmc(all_Gzw))/2)[vect_6t_v2]
-vectX_NaCl <- c(VCV_with_w_NaCl$G1_mat/2)[vect_6t_v2]
-
-vect_y_v2 =c(c(11:31),c(1:7),c(35:41),8)
-
-plot(vectX_VarFit,vect_y_v2,yaxt="n",bty="n",xlim=c(-.25,.25),xlab="Genetic (co)variances",xaxt="n",type='n',ylab="",cex.lab=1.2,ylim=c(35,0))
-
-lines(c(0,0),c(31.5,10.5))
-lines(c(0,0),c(.5,7.5),col="black")
-lines(c(0,0),c(34.5,41.5),col="black")
-
-
-axis(side=1,pos=44)
-
-axis(side=2,at=c(1:8,11:31,35:41),labels=c("SF*w","SB*w","FS*w","FB*w","BS*w","BF*w","Area*w","w",
-                                           "SF*SB","SF*FS","SF*FB","SF*BS","SF*BF","SF*Area",
-                                           "SB*FS","SB*FB","SB*BS","SB*BF","SB*Area",
-                                           "FS*FB","FS*BS","FS*BF","FS*Area",
-                                           "FB*BS","FB*BF","FB*Area","BS*BF","BS*Area","BF*Area",
-                                           "SF","SB","FS","FB","BS","BF","Area"),las=1)
-
-
-temp_95 <- HPDinterval(as.mcmc(all_Gzw)/2,prob=.95)
-arrows(temp_95[vect_6t_v2,1],vect_y_v2,temp_95[vect_6t_v2,2],vect_y_v2,code=3,length=.02,angle=90)
-
-temp_80 <- HPDinterval(as.mcmc(all_Gzw)/2,prob=.83)
-arrows(temp_80[vect_6t_v2,1],vect_y_v2, temp_80[vect_6t_v2,2],vect_y_v2,code=3,length=0,angle=90,lwd=2,col=
-         rep(c("cornflowerblue","darkgreen","cornflowerblue"),c(6,1,21)))
-
-points(vectX_VarFit,vect_y_v2,pch=21,bg="black",cex=.6)
-points(vectX_NaCl,vect_y_v2+.3,pch=21,bg="black",cex=.6)
-
-## Kept from the old one
-legend(-.28,25,c("Various fitness","Mean fitness"),lwd=2,lty=c(1,0),col=c("cornflowerblue","black"),cex=.8,pch=16)
-
-dev.off()
+# pdf("plots/Effect_of_fitness_variation.pdf",h=8,w=5)
+# par(mar=c(5,7,4,2))
+# 
+# vect_6t_v2 <- c(c(2:7,11:15,20:23,29:31,38,39,47),c(57:63),c(9*(1:8)-8))
+# vProb <- .95
+# 
+# vectX_VarFit <- c(posterior.mode(as.mcmc(all_Gzw))/2)[vect_6t_v2]
+# vectX_NaCl <- c(VCV_with_w_NaCl$G1_mat/2)[vect_6t_v2]
+# 
+# vect_y_v2 =c(c(11:31),c(1:7),c(35:41),8)
+# 
+# plot(vectX_VarFit,vect_y_v2,yaxt="n",bty="n",xlim=c(-.25,.25),xlab="Genetic (co)variances",xaxt="n",type='n',ylab="",cex.lab=1.2,ylim=c(35,0))
+# 
+# lines(c(0,0),c(31.5,10.5))
+# lines(c(0,0),c(.5,7.5),col="black")
+# lines(c(0,0),c(34.5,41.5),col="black")
+# 
+# 
+# axis(side=1,pos=44)
+# 
+# axis(side=2,at=c(1:8,11:31,35:41),labels=c("SF*w","SB*w","FS*w","FB*w","BS*w","BF*w","Area*w","w",
+#                                            "SF*SB","SF*FS","SF*FB","SF*BS","SF*BF","SF*Area",
+#                                            "SB*FS","SB*FB","SB*BS","SB*BF","SB*Area",
+#                                            "FS*FB","FS*BS","FS*BF","FS*Area",
+#                                            "FB*BS","FB*BF","FB*Area","BS*BF","BS*Area","BF*Area",
+#                                            "SF","SB","FS","FB","BS","BF","Area"),las=1)
+# 
+# 
+# temp_95 <- HPDinterval(as.mcmc(all_Gzw)/2,prob=.95)
+# arrows(temp_95[vect_6t_v2,1],vect_y_v2,temp_95[vect_6t_v2,2],vect_y_v2,code=3,length=.02,angle=90)
+# 
+# temp_80 <- HPDinterval(as.mcmc(all_Gzw)/2,prob=.83)
+# arrows(temp_80[vect_6t_v2,1],vect_y_v2, temp_80[vect_6t_v2,2],vect_y_v2,code=3,length=0,angle=90,lwd=2,col=
+#          rep(c("cornflowerblue","darkgreen","cornflowerblue"),c(6,1,21)))
+# 
+# points(vectX_VarFit,vect_y_v2,pch=21,bg="black",cex=.6)
+# points(vectX_NaCl,vect_y_v2+.3,pch=21,bg="black",cex=.6)
+# 
+# ## Kept from the old one
+# legend(-.28,25,c("Various fitness","Mean fitness"),lwd=2,lty=c(1,0),col=c("cornflowerblue","black"),cex=.8,pch=16)
+# 
+# dev.off()
 
 
 pdf("plots/Figure4_supplement_figure2.pdf",w=6)
@@ -194,7 +193,7 @@ arrows(temp_80[vect_6t_v2_VarFit,1],vect_y_v2[1:8],temp_80[vect_6t_v2_VarFit,2],
 temp_80 <- HPDinterval(VCV_with_w_NaCl$VCV_Mat[,1:64]/2,prob=.83)
 
 points(vectX_12t_v2,vect_y_v2,bg="black",pch=rep(c(8,16),each=8))
-legend(.1,5,c("Various fitness","Mean fitness"),lwd=2,lty=c(1,0),col=c("darkgreen","black"),cex=1,pch=c(8,16))
+legend(.1,5,c("Variable self-fertility","Average self-fertility"),lwd=2,lty=c(1,0),col=c("darkgreen","black"),cex=1,pch=c(8,16))
 dev.off()
 
 

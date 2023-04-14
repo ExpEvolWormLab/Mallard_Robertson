@@ -163,9 +163,9 @@ points(1:7+.15,c(VCV_mat_NaCl[[1]]$G1_mat/2)[vect_Diag],pch=21,col="black",bg="g
 arrows(1:7-.15,temp_95_NULL_NGM[vect_Diag,1],1:7-.15,temp_95_NULL_NGM[vect_Diag,2],code=3,length=.05,col="orange",angle=90,lwd=2)
 points(1:7-.15,c(VCV_mat_NGM[[1]]$G1_mat/2)[vect_Diag],pch=16,col="firebrick3")
 
-legend(.9,.21,"Posterior mean",bty="n")
+legend(.9,.21,"Posterior mode",bty="n")
 legend(1.15,.2,c("Low Salt","High Salt"),bty="n",ncol=2,pch=c(16,21),col=c("firebrick3","black"),pt.bg=c("firebrick3","gray"))
-legend(.9,.19,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
+legend(.9,.19,lwd=2,"95% CI of null posterior\nmodes",bty="n",col="orange")
 dev.off()
 
 
@@ -187,9 +187,9 @@ arrows((1:7)+0.2,temp_int[,1],(1:7)+0.2,temp_int[,2],length=.05,code=3,angle=90,
 points( (c(1:7)),eigen(VCV_mat_NGM[[1]]$G1_mat/2)$values ,pch=16,col="firebrick3")
 points( (c(1:7)+0.2),eigen(VCV_mat_NaCl[[1]]$G1_mat/2)$values ,pch=21,bg="grey")
 
-legend(3,.9,"Posterior mean",bty="n")
+legend(3,.9,"Posterior mode",bty="n")
 legend(3,.6,c("Low Salt","High Salt"),bty="n",ncol=2,pch=c(16,21),pt.bg=c("firebrick3","grey"),col=c("firebrick3","black"))
-legend(3,.3,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
+legend(3,.3,lwd=2,"95% CI of null posterior\nmode",bty="n",col="orange")
 
 
 dev.off()

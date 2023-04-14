@@ -183,9 +183,9 @@ arrows(1:7+.15,temp_95_NULL_GA4[vect_Diag,1],1:7+.15,temp_95_NULL_GA4[vect_Diag,
 points(1:7+.15,c(VCV_mat_NaCl[[4]]$G1_mat/2)[vect_Diag],pch=21,col="black",bg=col_GA[3])
 
 
-legend(.9,.21,"Posterior mean",bty="n")
+legend(.9,.21,"Posterior mode",bty="n")
 legend(1.15,.2,c("GA150","GA250","GA450"),bty="n",ncol=3,pch=21,pt.bg=col_GA,col="black")
-legend(.9,.19,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
+legend(.9,.19,lwd=2,"95% CI of null posterior\nmodes",bty="n",col="orange")
 dev.off()
 
 
@@ -205,9 +205,9 @@ temp_int <- HPDinterval(mcmc(sampled_variance_GA1_null[,2:8]),prob=.95)
 arrows((1:7)+.15,temp_int[,1],(1:7)+.15,temp_int[,2],length=.05,code=3,angle=90,col="orange",cex=1.2)
 points(c(1:7)+.15,eigen(VCV_mat_NaCl[[4]]$G1_mat/2)$values ,pch=21,bg=col_GA[3])
 
-legend(3,.9,"Posterior mean",bty="n")
+legend(3,.9,"Posterior mode",bty="n")
 legend(3,.6,c("GA150","GA250","GA450"),bty="n",ncol=2,pch=21,pt.bg=col_GA,col="black")
-legend(3,.3,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
+legend(3,.3,lwd=2,"95% CI of null posterior\nmodes",bty="n",col="orange")
 
 dev.off()
 
@@ -231,9 +231,9 @@ points(c(1:7)+.15,true_GA4_v2 ,pch=21,bg=col_GA[3])
 
 points( (c(1:7)+0.2),eigen(VCV_mat_NaCl[[1]]$G1_mat/2)$values ,pch=21,bg="grey")
 
-legend(3,.9,"Posterior mean",bty="n")
+legend(3,.9,"Posterior mode",bty="n")
 legend(3,.6,c("GA150","GA250","GA450","A6140"),bty="n",ncol=2,pch=21,pt.bg=c(col_GA,'gray'),col="black")
-legend(3,.3,lwd=2,"95% CI of null posterior\nmeans",bty="n",col="orange")
+legend(3,.3,lwd=2,"95% CI of null posterior\nmodes",bty="n",col="orange")
 
 dev.off()
 

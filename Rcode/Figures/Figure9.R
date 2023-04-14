@@ -164,7 +164,7 @@ par(mar=c(5,4,1,2))
 plot(rep(45,4),1:4,xlim=c(0,180),ylim=c(0.5,6.5),bty="n",las=1,pch=21,bg="grey",type="n",
      xlab="Angle (°)",yaxt="n",ylab="",xaxt="n")
 axis(1,at=c(0,45,90,135,180))
-axis(2,at=c(1,2,3,5.5),c("GA150","GA250","GA350","Random"),las=1)
+axis(2,at=c(1,2,3,5.5),c("GA150","GA250","GA450","Random"),las=1)
 
 abline(v=90,lty=2)
 
