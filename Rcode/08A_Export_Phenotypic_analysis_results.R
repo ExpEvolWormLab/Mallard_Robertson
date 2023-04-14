@@ -169,7 +169,7 @@ for(k in 1:7){
   
   
   arrows(posX , model_populations_means[model_populations_means$env_label=="NGM",paste0(vect_P_traits[k],"_lower.CL")], posX,model_populations_means[model_populations_means$env_label=="NGM",paste0(vect_P_traits[k],"_upper.CL")],code=3,angle=90,length=.1,col='black')
-  points(posX, model_populations_means[model_populations_means$env_label=="NGM",paste0(vect_P_traits[k],"_emmean")],pch=21,bg="white",cex=1,col="black",type="b",lwd=2)
+  points(posX, model_populations_means[model_populations_means$env_label=="NGM",paste0(vect_P_traits[k],"_emmean")],pch=21,bg="white",cex=1,col="black",type="p",lwd=2)
   
 }
 dev.off()
