@@ -124,9 +124,9 @@ for (i in vect_populations) {
 k=0
 for(vect_pop_id in vect_populations){
   k=k+1
-  write.table(matrix(paste0(round(1000*VCV_mat_NaCl[[k]]$G1_mat)/1000
-                            ,"  [",round(1000*matrix(HPDinterval(VCV_mat_NaCl[[k]]$VCV_Mat)[1:49,1],ncol=7))/1000,";",
-                            round(1000*matrix(HPDinterval(VCV_mat_NaCl[[k]]$VCV_Mat)[1:49,2],ncol=7))/1000,"]"),ncol=7),quote=FALSE,sep="\t",row.names=FALSE,col.names=FALSE,file=paste0("output_files/G_mat_tables/", vect_pop_id,"_High_Salt.txt"))
+  write.table(matrix(paste0(round(1000*VCV_mat_NaCl[[k]]$G1_mat/2)/1000
+                            ,"  [",round(1000*matrix(HPDinterval(VCV_mat_NaCl[[k]]$VCV_Mat/2)[1:49,1],ncol=7))/1000,";",
+                            round(1000*matrix(HPDinterval(VCV_mat_NaCl[[k]]$VCV_Mat/2)[1:49,2],ncol=7))/1000,"]"),ncol=7),quote=FALSE,sep="\t",row.names=FALSE,col.names=FALSE,file=paste0("output_files/G_mat_tables/", vect_pop_id,"_High_Salt.txt"))
   
   
 }
@@ -177,9 +177,9 @@ for (i in vect_populations) {
 k=0
 for(vect_pop_id in vect_populations){
   k=k+1
-  write.table(matrix(paste0(round(1000*VCV_mat_NGM[[k]]$G1_mat)/1000
-                            ,"  [",round(1000*matrix(HPDinterval(VCV_mat_NGM[[k]]$VCV_Mat)[1:49,1],ncol=7))/1000,";",
-                            round(1000*matrix(HPDinterval(VCV_mat_NGM[[k]]$VCV_Mat)[1:49,2],ncol=7))/1000,"]"),ncol=7),quote=FALSE,sep="\t",row.names=FALSE,col.names=FALSE,file=paste0("output_files/G_mat_tables/", vect_pop_id,"_Low_Salt.txt"))
+  write.table(matrix(paste0(round(1000*VCV_mat_NGM[[k]]$G1_mat/2)/1000
+                            ,"  [",round(1000*matrix(HPDinterval(VCV_mat_NGM[[k]]$VCV_Mat/2)[1:49,1],ncol=7))/1000,";",
+                            round(1000*matrix(HPDinterval(VCV_mat_NGM[[k]]$VCV_Mat/2)[1:49,2],ncol=7))/1000,"]"),ncol=7),quote=FALSE,sep="\t",row.names=FALSE,col.names=FALSE,file=paste0("output_files/G_mat_tables/", vect_pop_id,"_Low_Salt.txt"))
   
   
 }
