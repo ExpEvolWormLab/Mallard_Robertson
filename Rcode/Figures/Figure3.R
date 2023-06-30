@@ -1,15 +1,17 @@
 rm(list=ls());gc()
 library(MCMCglmm)
+load('output_files_elife//RData/Analysis_Cemee_Pop_WI_NaCl.RData')
 
-load("output_files/RData/G_matrices_high_salt.RData")
-load("output_files/RData/G_matrices_low_salt.RData")
-vect_P_traits = c("T12", "T13", "T21", "T23", "T31","T32","area.F")
 
 # Load EV_plast
-load('output_files/RData/SSCP_eigenvectors.RData')
+manova.env=new.env()
+load('output_files_elife/RData/Pi_Theta_Plasticity_A6140_MANOVA.RData',envir=manova.env)
+EV_plast=manova.env$EV_plast
+rm(manova.env)
 
+# Load the null matrices
 null_matrix=new.env()
-load("output_files/RData_Random/Random_G_Analysis_Cemee_Pop_WI_A6140_NaCl_LIGHT.RData",envir=null_matrix)
+load("output_files_elife/RData_Random/Random_G_Analysis_Cemee_Pop_WI_A6140_NaCl_LIGHT.RData",envir=null_matrix)
 A6140_NaCl_NULL = null_matrix$df_G1
 rm(null_matrix);gc()
 
@@ -20,6 +22,7 @@ angle_theta <- function(x, y) {
   theta <- 180/pi * as.numeric(acos(dot.prod/(norm.x * norm.y)))
   as.numeric(theta)
 }
+
 
 vect_rand_piE_NaCl <- NULL
 vect_rand_piE_NaCl_NULL <- NULL
@@ -63,12 +66,12 @@ vect_rand_thetaE_NaCl[vect_rand_thetaE_NaCl>90] = 180 - vect_rand_thetaE_NaCl[ve
 vect_rand_thetaE_NaCl_2[vect_rand_thetaE_NaCl_2>90] = 180 - vect_rand_thetaE_NaCl_2[vect_rand_thetaE_NaCl_2>90]
 vect_rand_thetaE_NaCl_3[vect_rand_thetaE_NaCl_3>90] = 180 - vect_rand_thetaE_NaCl_3[vect_rand_thetaE_NaCl_3>90]
 
-pdf(file='plots/Figure3.pdf',width=6, height=4)
-
+pdf(file='plots_elife/Figure3.pdf',width=6, height=4)
+#par(mfrow=c(1,2))
 layout(mat=matrix(c(1,2),1,2),w=c(1,1.3))
 par(mar=c(5,4,4,2))
 
-plot(1,1,type="n",ylim=c(0,1),xlim=c(2.2,2.38),bty="n",las=1,yaxt="n",xlab="",ylab=expression(paste("Projection along ",p[max]," (",Pi,")")),xaxt="n")
+plot(1,1,type="n",ylim=c(0,1),xlim=c(2.2,2.38),bty="n",las=1,yaxt="n",xlab="",ylab=expression(paste("Projection along ",delta,"p (",Pi,")")),xaxt="n")
 axis(2,at=c(0,0.5,1))
 mtext(side=3,"A",at=2.1,cex=2)
 axis(side=1,at=c(2.25,2.3),labels=c("Null","Observed"),las=2)
@@ -82,8 +85,10 @@ points(2.3,mean(vect_rand_piE_NaCl),pch=16)
 temp_95 <- HPDinterval(as.mcmc(vect_rand_piE_NaCl_NULL))
 arrows(2.25,temp_95[1,1],2.25,temp_95[1,2],code=3,angle=90,length=0.05,col="orange",lwd=2)
 
+#legend(0,2.35,c(expression(Pi[plast]),expression(Pi[plast_Randomized])),pch=c(16,NA),lwd=1,col=c("black","orange"),cex=1)
+
 par(mar=c(5,4,4,2))
-plot(1,1,type="n",ylim=c(0,90),xlab="",xlim=c(1,2.5),bty="n",las=1,yaxt="n",ylab=expression(paste("Angle with ",p[max]," (",Theta,")")),xaxt="n")
+plot(1,1,type="n",ylim=c(0,90),xlab="",xlim=c(1,2.5),bty="n",las=1,yaxt="n",ylab=expression(paste("Angle with ",delta,"p (",Theta,")")),xaxt="n")
 axis(2,at=c(0,45,90))
 mtext(side=3,"B",at=0,cex=2)
 
@@ -101,7 +106,7 @@ arrows(1.75,temp_95[1,1],1.75,temp_95[1,2],code=3,angle=90,length=0.05)
 arrows(1.75,temp_80[1,1],1.75,temp_80[1,2],code=3,angle=90,length=0,col="gray",lwd=2)
 points(1.75,mean(vect_rand_thetaE_NaCl_2),pch=16)
 
-temp_95 <- HPDinterval(as.mcmc(vect_rand_thetaE_NaCl_3),prob=0.95)
+temp_95 <- HPDinterval(as.mcmc(vect_rand_thetaE_NaCl_3))
 temp_80 <- HPDinterval(as.mcmc(vect_rand_thetaE_NaCl_3),prob=0.83)
 
 arrows(2,temp_95[1,1],2,temp_95[1,2],code=3,angle=90,length=0.05)
